@@ -11,6 +11,7 @@ const Task = (props) => {                            // Main arrow function with
 
   // Task container
   // Checkbox with conditional rendering 
+
   return (
     <View style={styles.taskBox}>
       <View style={styles.insideBox}>
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#59AAAA",
     padding: 15,
     borderRadius: 15,
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: "#97D9D9",
     flexDirection: "row",
     alignItems: "center",

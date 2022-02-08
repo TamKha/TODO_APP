@@ -1,4 +1,3 @@
-import react from 'react';
 import Todo from './src/Todo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -13,7 +12,7 @@ export default function App() {
         screenOptions={{
           tabBarLabelStyle: { fontSize: 15, fontWeight: "bold", color:'#97D9D9' },
           tabBarItemStyle: { width: 100},
-          tabBarStyle: { backgroundColor: "#59AAAA", borderColor:'#97D9D9', borderWidth:2},
+          tabBarStyle: { backgroundColor: "#59AAAA", borderColor:'#97D9D9', borderWidth:4},
         }}
       >
         <Tab.Screen name="Tasks" component={Todo} />

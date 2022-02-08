@@ -1,15 +1,16 @@
-import react from "react";
 import {
   View,
   StyleSheet,
   KeyboardAvoidingView,
   TextInput,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from "react-native";
 import { useState } from "react";
 import Task from "./Task";
 import { Feather } from "@expo/vector-icons";
+
 
 // Custom component
 
@@ -28,56 +29,58 @@ const Todo = ({ navigaton }) => {                // Main arrow function
     setTaskList(taskCopy);                       // Setting the hook with the variable that renders new value
   };
 
+  const image = {                                                      // Variable for background image
+    uri: "https://cutewallpaper.org/22/mint-wallpapers/109031532.jpg",
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.taskFrame}>
-        <View style={styles.insideFrame}>
-          {taskList.map((item, index) => {
-            return (
-              <TouchableOpacity key={index} onPress={() => taskFinish(index)}> {/** Button with onPress function that calls on a removing task method. */}
-                <Task text={item} />
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </View>
-
-
-      {/** Conditional rendering: IOS: when keyboard pops, the component moves up. Android: The view resize.
-       * TextInput with placeholder to write in task.
-       * onChangeText function to make a task.
-       * Button with onPress function to add task to list.
-       */}
-      
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"} 
-        style={styles.writeBox}
-      >
-        <TextInput                                              
-          style={styles.inputText}
-          placeholder={"Write here..."}
-          placeholderTextColor={'#59AAAA'}
-          value={task}
-          onChangeText={(text) => setTask(text)}
-        />
-        <TouchableOpacity onPress={() => addTask()}>
-          <View style={styles.addBox}>
-            <Feather name="arrow-up-circle" size={37} color="#59AAAA" />
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <View style={styles.taskFrame}>
+          <View style={styles.insideFrame}>
+            {taskList.map((item, index) => {
+              return (
+                <TouchableOpacity key={index} onPress={() => taskFinish(index)}>
+                  {/** Button with onPress function that calls on a removing task method. */}
+                  <Task text={item} />
+                </TouchableOpacity>
+              );
+            })}
           </View>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
-    </View>
+        </View>
+
+        {/** Conditional rendering: IOS: when keyboard pops, the component moves up. Android: The view resize.
+         * TextInput with placeholder to write in task.
+         * onChangeText function to make a task.
+         * Button with onPress function to add task to list.
+         */}
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.writeBox}
+        >
+          <TextInput
+            style={styles.inputText}
+            placeholder={"Write here..."}
+            placeholderTextColor={"#59AAAA"}
+            value={task}
+            onChangeText={(text) => setTask(text)}
+          />
+          <TouchableOpacity onPress={() => addTask()}>
+            <View style={styles.addBox}>
+              <Feather name="arrow-up-circle" size={37} color="#59AAAA" />
+            </View>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </ImageBackground>
   );
 };
 
 // Styling
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F3FFF6",
+  image:{
+    flex:1, 
   },
-
   taskFrame: {
     paddingTop: 20,
     paddingHorizontal: 20,
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
   addBox: {
     width: 80,
     justifyContent: "center",
-  },
+  },  
 });
 
 export default Todo;
